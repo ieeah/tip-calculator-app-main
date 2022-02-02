@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.9/tailwind.min.css'
+		integrity='sha512-SvJR34InARUfJb279ipE/gjQqX11MDKaly9MNb0vevuWQJmZ23UH7F/65ScEsvLI+myKGbdfA1En82wVSCHQ8A=='
+		crossorigin='anonymous' />
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>Document</title>
+</head>
+<body>
+	<h1>SPLITTER</h1>
+	<div class="calculator">
+		<div class="left">
+			<div class="bill">
+				<div class="label">
+					Bill
+				</div>
+				<div class="amount_input">
+					<img class="icon" src="./images/icon-dollar.svg" alt="">
+					<input type="number" name="amount" id="amount" placeholder="0" min="0" v-model.number="bill" ref="bill">
+				</div>
+			</div>
+			<div class="select_tip">
+				<div>Select tip %</div>
+				<div class="tip_options">
+					<div :class="{active: activeOption == 1}" @click="letPercentage(5), setActiveOption(1)" class="option">
+						5%
+					</div>
+					<div :class="{active: activeOption == 2}" @click="letPercentage(10), setActiveOption(2)" class="option">
+						10%
+					</div>
+					<div :class="{active: activeOption == 3}" @click="letPercentage(15), setActiveOption(3)" class="option">
+						15%
+					</div>
+					<div :class="{active: activeOption == 4}" @click="letPercentage(25), setActiveOption(4)" class="option">
+						25%
+					</div>
+					<div :class="{active: activeOption == 5}" @click="letPercentage(50), setActiveOption(5)" class="option">
+						50%
+					</div>
+					<input :class="{active: activeOption == 6}" @click="setActiveOption(6)" @change="setCustomPercentage()" type="number"
+						name="" id="customTip" class="option custom"
+						placeholder="Custom" v-model.number="customPercentage">
+				</div>
+			</div>
+			<div class="people">
+				<div class="people_titles">
+					<div class="label">
+						Number of people
+					</div>
+					<div class="message" :class="{show: peopleInvalid }">
+						Can't be zero
+					</div>
+				</div>
+				<div class="people_input">
+					<img class="icon" src="./images/icon-dollar.svg" alt="">
+					<input type="number" name="people" id="people" placeholder="0" min="0" v-model.number="persons">
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="top">
+				<div class="tip">
+					<div class="tip_amount">
+						<div class="right_title">Tip Amount</div>
+						<div class="right_sub">/ person</div>
+					</div>
+					<div id="tip_display" class="display" ref="tipDisplay">{{ computedTip }}</div>
+				</div>
+				<div class="total">
+					<div class="person">
+						<div class="right_title">Total</div>
+						<div class="right_sub">/ person</div>
+					</div>
+					<div id="person_display" class="display" ref="personDisplay">{{personalTot}}</div>
+				</div>
+			</div>
+			<div class="reset_btn" @click="reset()">reset</div>
+		</div>
+	</div>
+	
+	<script src="main.js"></script>
+</body>
+</html>
